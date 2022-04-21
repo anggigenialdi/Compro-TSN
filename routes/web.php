@@ -19,10 +19,14 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+$router->group(['prefix' => 'api'],function()use ($router){
+    Route::post('/vacancy/add','VacancyController@addVacancy');
+});
 
 Route::get('/admin_dashboard', 'Admin\DashboardController@index')->middleware('role:admin');
 Route::get('/users_dashboard', 'Users\DashboardController@index')->middleware('role:basic');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/vacancy', 'VacancyController@index')->name('vacancy');
 
 
 // Route::middleware(['auth', 'admin'])->group(function () {
