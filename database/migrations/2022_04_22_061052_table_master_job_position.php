@@ -17,6 +17,7 @@ class TableMasterJobPosition extends Migration
             $table->bigIncrements('id');
             $table->string('uuid');
             $table->string('position');
+            $table->string('category');
             $table->timestamps();
         });
     }

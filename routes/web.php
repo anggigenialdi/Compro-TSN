@@ -29,8 +29,8 @@ Route::group(['prefix' => 'api/v1'], function () {
     Route::get('/employees', [App\Http\Controllers\Employee\EmployeeController::class, 'index'])->name('employee.index')->middleware('role:admin');
     Route::post('/employees/create', [App\Http\Controllers\Employee\EmployeeController::class, 'store'])->name('employee.store')->middleware('role:admin');
 
-    Route::get('/job-positions', [App\Http\Controllers\Master\JobPosition\MasterJobPositionController::class, 'index'])->name('job_position.index')->middleware('role:admin');
-    Route::post('/job-positions/create', [App\Http\Controllers\Master\JobPosition\MasterJobPositionController::class, 'create'])->name('job_position.create')->middleware('role:admin');
+    Route::get('/job-positions', [App\Http\Controllers\JobPosition\MasterJobPositionController::class, 'index'])->name('JobPosition.index')->middleware('role:admin');
+    Route::post('/job-positions/create', [App\Http\Controllers\JobPosition\MasterJobPositionController::class, 'create'])->name('JobPosition.create')->middleware('role:admin');
 });
 Route::get('/vacancy', 'VacancyController@index')->name('vacancy');
 
