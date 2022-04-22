@@ -21,6 +21,7 @@
 
     <!-- Favicon -->
     <link href="{{ asset('img/favicon.png') }}" rel="icon" type="image/png">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 </head>
 <body id="page-top">
 
@@ -46,11 +47,19 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>{{ __('Dashboard') }}</span></a>
         </li>
+
         <li class="nav-item {{ Nav::isRoute('employe.create') }}">
             <a class="nav-link" href="{{ route('employe.create') }}">
                 <i class="fas fa-fw fa-file-alt"></i>
                 <span>{{ __('Employe') }}</span></a>
         </li>
+
+        <li class="nav-item {{ Nav::isRoute('vacancy') }}">
+            <a class="nav-link" href="{{ route('vacancy') }}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>{{ __('Vacancy') }}</span></a>
+        </li>
+        
         <!-- Divider -->
         <hr class="sidebar-divider">
         <!-- Sidebar Toggler (Sidebar) -->
@@ -160,5 +169,12 @@
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#dataTable').DataTable();
+} );
+</script>
 </body>
 </html>

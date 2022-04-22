@@ -19,11 +19,17 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+$router->group(['prefix' => 'api'],function()use ($router){
+    Route::post('/vacancy/add','VacancyController@addVacancy');
+});
 
 Route::group(['prefix' => 'api/v1'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('role:admin');
     Route::get('/employe', [App\Http\Controllers\Employe\EmployeController::class, 'create'])->name('employe.create')->middleware('role:admin');
     Route::post('/employe', [App\Http\Controllers\Employe\EmployeController::class, 'store'])->name('employe.store')->middleware('role:admin');
+    Route::get('/vacancy', 'VacancyController@index')->name('vacancy');
+
 });
+Route::get('/vacancy', 'VacancyController@index')->name('vacancy');
 
 Route::get('/users-dashboard', [App\Http\Controllers\Users\DashboardController::class, 'index'])->middleware('role:basic');
