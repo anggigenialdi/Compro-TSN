@@ -19,12 +19,14 @@ class UsersTableSeeder extends Seeder
         User::insert([
             [
                 'name' => 'Administrator',
+                'last_name' => 'tsn',
                 'email' => 'iamadmin@gmail.com',
                 'role' => 'admin',
                 'password' => Hash::make('12345678'),
             ],
             [
-                'name' => 'User Basic',
+                'name' => 'User',
+                'last_name' => 'Basic',
                 'email' => 'iamuser@gmail.com',
                 'role' => 'basic',
                 'password' => Hash::make('12345678'),
