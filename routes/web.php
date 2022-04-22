@@ -19,16 +19,18 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-$router->group(['prefix' => 'api'],function()use ($router){
-    Route::post('/vacancy/add','VacancyController@addVacancy');
+$router->group(['prefix' => 'api'], function () use ($router) {
+    Route::post('/vacancy/add', 'VacancyController@addVacancy');
 });
 
 Route::group(['prefix' => 'api/v1'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('role:admin');
-    Route::get('/employe', [App\Http\Controllers\Employe\EmployeController::class, 'create'])->name('employe.create')->middleware('role:admin');
-    Route::post('/employe', [App\Http\Controllers\Employe\EmployeController::class, 'store'])->name('employe.store')->middleware('role:admin');
-    Route::get('/vacancy', 'VacancyController@index')->name('vacancy');
 
+    Route::get('/employees', [App\Http\Controllers\Employee\EmployeeController::class, 'index'])->name('employee.index')->middleware('role:admin');
+    Route::post('/employees/create', [App\Http\Controllers\Employee\EmployeeController::class, 'store'])->name('employee.store')->middleware('role:admin');
+
+    Route::get('/job-positions', [App\Http\Controllers\Master\JobPosition\MasterJobPositionController::class, 'index'])->name('job_position.index')->middleware('role:admin');
+    Route::post('/job-positions/create', [App\Http\Controllers\Master\JobPosition\MasterJobPositionController::class, 'create'])->name('job_position.create')->middleware('role:admin');
 });
 Route::get('/vacancy', 'VacancyController@index')->name('vacancy');
 

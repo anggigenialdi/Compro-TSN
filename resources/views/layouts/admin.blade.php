@@ -48,10 +48,10 @@
                 <span>{{ __('Dashboard') }}</span></a>
         </li>
 
-        <li class="nav-item {{ Nav::isRoute('employe.create') }}">
-            <a class="nav-link" href="{{ route('employe.create') }}">
+        <li class="nav-item {{ Nav::isRoute('employee.index') }}">
+            <a class="nav-link" href="{{ route('employee.index') }}">
                 <i class="fas fa-fw fa-file-alt"></i>
-                <span>{{ __('Employe') }}</span></a>
+                <span>{{ __('Employee') }}</span></a>
         </li>
 
         <li class="nav-item {{ Nav::isRoute('vacancy') }}">
@@ -59,7 +59,7 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>{{ __('Vacancy') }}</span></a>
         </li>
-        
+
         <!-- Divider -->
         <hr class="sidebar-divider">
         <!-- Sidebar Toggler (Sidebar) -->

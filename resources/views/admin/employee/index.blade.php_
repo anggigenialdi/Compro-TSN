@@ -50,7 +50,7 @@
                                 <div class="col-lg-12">
                                     <div class="p-5">
                                         <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4">{{ __('Add Employe') }}</h1>
+                                            <h1 class="h4 text-gray-900 mb-4">{{ __('Add Employee') }}</h1>
                                         </div>
 
                                         @if ($errors->any())
@@ -63,7 +63,7 @@
                                             </div>
                                         @endif
 
-                                        <form method="POST" action="{{ route('employe.store') }}" class="user"
+                                        <form method="POST" action="{{ route('employee.store') }}" class="user"
                                             enctype="multipart/form-data">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

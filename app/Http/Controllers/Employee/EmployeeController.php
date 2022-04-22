@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Employe;
+namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
-use App\Models\Employe;
-use App\Models\User;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
-class EmployeController extends Controller
+class EmployeeController extends Controller
 {
-    public function create()
+    public function index()
     {
+        $dataEmployee = Employee::orderBy('id','desc')->get();
 
-        return view('employe.create');
+        return view('admin.employee.index',compact(['dataEmployee']));
     }
-    public function store(Request $request)
+
+    public function create(Request $request)
     {
         //validate incoming request 
         $this->validate($request, [
@@ -24,7 +25,7 @@ class EmployeController extends Controller
         ]);
         try {
             //Cek Duplicate data
-            $duplicate = Employe::where('job_position', $request->input('job_position'))->first();
+            $duplicate = Employee::where('job_position', $request->input('job_position'))->first();
 
             if ($duplicate) {
                 return response()->json([
@@ -33,14 +34,14 @@ class EmployeController extends Controller
                 ], 425);
             } else {
 
-                $saveData = new Employe;
+                $saveData = new Employee;
                 $saveData->full_name = $request->input('full_name');
                 $saveData->job_position = $request->input('job_position');
 
                 if ($request->file('profile_picture')) {
                     $file = $request->file('profile_picture');
                     $filename = date('YmdHi') . $file->getClientOriginalName();
-                    $file->move(public_path('employe'), $filename);
+                    $file->move(public_path('employee'), $filename);
                     $data['profile_picture'] = $filename;
                 }
 
@@ -48,11 +49,13 @@ class EmployeController extends Controller
 
                 $saveData->save();
 
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Input Data Berhasil',
-                    'data'    => $saveData,
-                ], 201);
+                // return response()->json([
+                //     'success' => true,
+                //     'message' => 'Input Data Berhasil',
+                //     'data'    => $saveData,
+                // ], 201);
+                return redirect('employee.create')->with( session()->flash('success', 'Berhasil') );
+
             }
         } catch (\Throwable $th) {
             //return error message

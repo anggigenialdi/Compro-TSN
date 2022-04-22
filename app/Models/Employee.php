@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Employe extends Model
+class Employee extends Model
 {
     use HasFactory;
-    protected $table = "employe";
+    protected $table = "employees";
 
     protected $fillable = [
         'full_name', 'job_position', 'profile_picture', 'quote',
