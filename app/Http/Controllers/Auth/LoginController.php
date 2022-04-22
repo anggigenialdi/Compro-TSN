@@ -32,14 +32,15 @@ class LoginController extends Controller
         $role = Auth::user()->role;
         switch ($role) {
             case 'admin':
-                return '/admin_dashboard';
+                session()->flash('success', 'You are logged in!');
+                return ('/api/v1/home');
                 break;
             case 'basic':
-                return '/users_dashboard';
+                return ('/users-dashboard');
                 break;
 
             default:
-                return '/home';
+                return ('/api/v1/home');
                 break;
         }
     }

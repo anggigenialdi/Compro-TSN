@@ -43,7 +43,7 @@ class User extends Authenticatable
      *
      * @return string
      */
-    public function getFullNameAttribute()
+    public function getfull_nameAttribute()
     {
         if (is_null($this->last_name)) {
             return "{$this->name}";

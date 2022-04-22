@@ -20,13 +20,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/admin_dashboard', 'Admin\DashboardController@index')->middleware('role:admin');
-Route::get('/users_dashboard', 'Users\DashboardController@index')->middleware('role:basic');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['prefix' => 'api/v1'], function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('role:admin');
+    Route::get('/employe', [App\Http\Controllers\Employe\EmployeController::class, 'create'])->name('employe.create')->middleware('role:admin');
+    Route::post('/employe', [App\Http\Controllers\Employe\EmployeController::class, 'store'])->name('employe.store')->middleware('role:admin');
+});
 
-
-// Route::middleware(['auth', 'admin'])->group(function () {
-//     Route::get('admin', function () {
-//         return 'admin page';
-//     });
-// });
+Route::get('/users-dashboard', [App\Http\Controllers\Users\DashboardController::class, 'index'])->middleware('role:basic');

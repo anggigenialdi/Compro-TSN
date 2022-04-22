@@ -46,6 +46,11 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>{{ __('Dashboard') }}</span></a>
         </li>
+        <li class="nav-item {{ Nav::isRoute('employe.create') }}">
+            <a class="nav-link" href="{{ route('employe.create') }}">
+                <i class="fas fa-fw fa-file-alt"></i>
+                <span>{{ __('Employe') }}</span></a>
+        </li>
         <!-- Divider -->
         <hr class="sidebar-divider">
         <!-- Sidebar Toggler (Sidebar) -->

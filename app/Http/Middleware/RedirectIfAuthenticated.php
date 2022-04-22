@@ -23,14 +23,15 @@ class RedirectIfAuthenticated
 
             switch ($role) {
                 case 'admin':
-                    return redirect('/admin_dashboard');
+                    session()->flash('success', 'You are logged in!');
+                    return ('/api/v1/home');
                     break;
                 case 'basic':
-                    return redirect('/users_dashboard');
+                    return redirect('/users-dashboard');
                     break;
 
                 default:
-                    return redirect('/home');
+                    return redirect('/api/v1/home');
                     break;
             }
         }
