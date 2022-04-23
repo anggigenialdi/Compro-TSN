@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
-    public function index()
+    public function employeeIndex()
     {
         $dataEmployee = Employee::orderBy('id','desc')->get();
 

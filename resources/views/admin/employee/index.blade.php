@@ -8,6 +8,10 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Daftar Pegawai</h6>
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-modal">
+                    Add
+                </button>
+                @include('admin.employee.modal-add')
             </div>
             <div class="card-body">
                 <table class="table table-bordered table-stripped table-hover" id="dataTable" cellspacing="0">

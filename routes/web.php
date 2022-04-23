@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Employee\EmployeeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,9 +28,10 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('role:admin');
+
 $router->group(['prefix' => 'employees'], function () use ($router) {
-    Route::get('/index', [App\Http\Controllers\Employee\EmployeeController::class, 'index'])->name('employee.index')->middleware('role:admin');
-    Route::post('/employees/create', [App\Http\Controllers\Employee\EmployeeController::class, 'store'])->name('employee.store')->middleware('role:admin');
+    Route::get('/index', 'Employee\EmployeeController@employeeIndex')->name('employee.index')->middleware('role:admin');
+    Route::post('/create', 'Employee\EmployeeController@store')->name('employee.store')->middleware('role:admin');
 });
 
 $router->group(['prefix' => 'master-data'], function () use ($router) {

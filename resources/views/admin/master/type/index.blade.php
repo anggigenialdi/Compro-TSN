@@ -7,7 +7,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-2">
-                <h6 class="m-0 font-weight-bold text-primary">Daftar Job Type</h6><br>
+                <h6 class="m-0 font-weight-bold text-primary">Daftar Type</h6>
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-modal">
                     Add
                 </button>

@@ -17,8 +17,9 @@ class TableEmployees extends Migration
             $table->bigIncrements('id');
             $table->string('full_name');
             $table->string('job_position');
+            $table->string('type')->nullable();
+            $table->string('category')->nullable();
             $table->string('profile_picture');
-            $table->string('quote');
             $table->timestamps();
         });
     }
