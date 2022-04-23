@@ -23,16 +23,16 @@
                           </tr>
                           </thead>
                       <tbody id="pencarian">
-                          @foreach($vacancies as $vacancy)
+                          @foreach($applicant as $app)
                               <tr>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$loop->iteration }}</td>
-                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$vacancy->email}}</td>
-                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$vacancy->full_name}}</td>
-                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$vacancy->phone_number}}</td>
-                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$vacancy->job_position}}</td>
-                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$vacancy->work_experience}} Tahun</td>
+                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$app->email}}</td>
+                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$app->full_name}}</td>
+                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$app->phone_number}}</td>
+                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$app->job_position}}</td>
+                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$app->work_experience}} Tahun</td>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">
-                                <a class="btn btn-sm btn-primary" href="{{ asset('resume/{$vacancy->file_resume}') }}" target ="_blank">
+                                <a class="btn btn-sm btn-primary" href="http://localhost:8000/resume/{{$app->file_resume}}" target ="_blank">
                                     Lihat CV
                                 </a>
                                 </td>

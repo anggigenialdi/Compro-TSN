@@ -4,23 +4,49 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Vacancy;
+use App\Models\Applicant;
 class VacancyController extends Controller
 {
-    public function index()
+    public function indexJobVacancy()
     {
         $vacancies = Vacancy::orderBy('id','desc')->get();
 
-        return view('admin.vacancy.index',compact(['vacancies']));
+        return view('admin.vacancy.jobvacancy.index',compact(['vacancies']));
     }
-    public function addVacancy(Request $request){
-            $cek_data =Vacancy::where('email',$request->email)->first();
+    public function addJobVacancy(Request $request){
+                $vacancy = new Vacancy;
+                $vacancy->position = $request->position;
+                $vacancy->category = $request->category;
+                $vacancy->type = $request->type;
+                $vacancy->active = true;
+                $vacancy->end_date = $request->end_date;
+                $vacancy->save();
+    }
+    public function updateJobVacancy($id,Request $request){
+                $vacancy = Vacancy::find($id);
+                $vacancy->position = $request->position;
+                $vacancy->category = $request->category;
+                $vacancy->type = $request->type;
+                $vacancy->active = $request->active == 0 ? false : true;
+                $vacancy->end_date = $request->end_date;
+                $vacancy->save();
+                return back();
+    }
+    public function indexApplicant()
+    {
+        $applicant = Applicant::orderBy('id','desc')->get();
+
+        return view('admin.vacancy.applicant.index',compact(['applicant']));
+    }
+    public function applyVacancy(Request $request){
+            $cek_data =Applicant::where('email',$request->email)->first();
             if($cek_data){
                 return response()->json([
                     'success' => false,
                     'message' => 'Email Sudah Terdaftar',
                 ],400);            }
             else{
-                $vacancy = new Vacancy;
+                $vacancy = new Applicant;
                 $vacancy->full_name = $request->full_name;
                 $vacancy->email = $request->email;
                 $vacancy->phone_number = $request->phone_number;
@@ -43,5 +69,21 @@ class VacancyController extends Controller
                     'data'    => $vacancy
                 ],200);
             }
+    }
+    public function getVacancyActive(){
+        $vacancies = Vacancy::where('active',true)->orderBy('id','desc')->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'Berhasil',
+            'data'    => $vacancies
+        ],200);
+    }
+    public function getVacancyActiveDetail($id){
+        $vacancy = Vacancy::where('id',$id)->first();
+        return response()->json([
+            'success' => true,
+            'message' => 'Berhasil',
+            'data'    => $vacancy
+        ],200);
     }
 }

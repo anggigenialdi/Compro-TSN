@@ -15,14 +15,11 @@ class CreateVacanciesTable extends Migration
     {
         Schema::create('vacancies', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name');
-            $table->string('email');
-            $table->string('phone_number');
-            $table->string('job_position');
-            $table->string('work_experience');
-            $table->string('link_linkedin');
-            $table->string('link_portfolio');
-            $table->string('file_resume');
+            $table->string('position');
+            $table->string('category');
+            $table->string('type');
+            $table->string('active');
+            $table->string('end_date');
             $table->timestamps();
         });
     }

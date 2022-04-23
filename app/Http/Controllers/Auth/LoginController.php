@@ -33,14 +33,14 @@ class LoginController extends Controller
         switch ($role) {
             case 'admin':
                 session()->flash('success', 'You are logged in!');
-                return ('/api/v1/home');
+                return ('home');
                 break;
             case 'basic':
                 return ('/users-dashboard');
                 break;
 
             default:
-                return ('/api/v1/home');
+                return ('home');
                 break;
         }
     }

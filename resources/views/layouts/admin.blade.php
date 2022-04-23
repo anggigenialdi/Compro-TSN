@@ -57,11 +57,28 @@
                     <i class="fas fa-fw fa-users"></i>
                     <span>{{ __('Employee') }}</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Vacancy</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                    <a href="{{ route('vacancy.job') }}" class="collapse-item">
+                        <i class="fas fa-fw fa-book"></i>
+                        <span>{{ __('Kelola Lowongan') }}</span>
+                    </a>
+                    <a href="{{ route('vacancy.applicant') }}" class="collapse-item">
+                        <i class="fas fa-fw fa-book"></i>
+                        <span>{{ __('Daftar Pelamar') }}</span>
+                    </a>
+                    </div>
+                </div>
+            </li>
 
             <li class="nav-item {{ Nav::isRoute('vacancy') }}">
-                <a class="nav-link" href="{{ route('vacancy') }}">
-                    <i class="fas fa-fw fa-book"></i>
-                    <span>{{ __('Vacancy') }}</span></a>
+                
             </li>
 
             <li class="nav-item {{ Nav::isRoute('JobPosition.index') }}">
