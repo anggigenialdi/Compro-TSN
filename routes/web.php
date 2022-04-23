@@ -31,7 +31,8 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('role:admi
 
 $router->group(['prefix' => 'employees'], function () use ($router) {
     Route::get('/index', 'Employee\EmployeeController@employeeIndex')->name('employee.index')->middleware('role:admin');
-    Route::post('/create', 'Employee\EmployeeController@store')->name('employee.store')->middleware('role:admin');
+    Route::post('/create', 'Employee\EmployeeController@employeeCreate')->name('employee.create')->middleware('role:admin');
+    Route::post('/update/{id}', 'Employee\EmployeeController@employeeUpdate')->name('employee.update')->middleware('role:admin');
 });
 
 $router->group(['prefix' => 'master-data'], function () use ($router) {
@@ -49,6 +50,7 @@ $router->group(['prefix' => 'master-data'], function () use ($router) {
     Route::post('/type/create', 'Master\MasterDataController@createType')->name('MasterType.createType')->middleware('role:admin');
     Route::post('/type/{id}', 'Master\MasterDataController@updateType')->name('MasterType.updateType')->middleware('role:admin');
 
+    //AUTOCOMPLETE
 
 });
 
@@ -58,3 +60,6 @@ Route::post('/vacancy/job/update/{id}', 'VacancyController@updateJobVacancy')->n
 Route::get('/vacancy/applicant', 'VacancyController@indexApplicant')->name('vacancy.applicant');
 
 Route::get('/users-dashboard', [App\Http\Controllers\Users\DashboardController::class, 'index'])->middleware('role:basic');
+Route::get('/autocomplete/position', 'Master\MasterDataController@autocompletePosition')->name('MasterPosition.autocompletePosition')->middleware('role:admin');
+Route::get('/autocomplete/type', 'Master\MasterDataController@autocompleteType')->name('MasterType.autocompleteType')->middleware('role:admin');
+

@@ -62,7 +62,7 @@ class MasterDataController extends Controller
     public function updatePosition(Request $request, $id)
     {
         try {
-            
+
             $updateData = MasterJobPosition::find($id);
             $updateData->position = $request->input('position');
             $updateData->save();
@@ -109,7 +109,7 @@ class MasterDataController extends Controller
     public function updateCategory(Request $request, $id)
     {
         try {
-            
+
             $updateData = MasterCategory::find($id);
             $updateData->category = $request->input('category');
             $updateData->save();
@@ -156,7 +156,7 @@ class MasterDataController extends Controller
     public function updateType(Request $request, $id)
     {
         try {
-            
+
             $updateData = MasterType::find($id);
             $updateData->type = $request->input('type');
             $updateData->save();
@@ -169,5 +169,24 @@ class MasterDataController extends Controller
                 'message' => $th
             ], 409);
         }
+    }
+
+    public function autocompletePosition(Request $request)
+    {
+        $datas = MasterJobPosition::select('position')
+            ->where('position', 'LIKE', "%{$request->terms}%")
+            ->pluck('position');
+
+        return response()->json($datas);
+    }
+
+    public function autocompleteType(Request $request)
+    {
+        $datas = MasterType::select('type')
+            ->where('type', 'LIKE', "%{$request->terms}%")
+            ->pluck('type');
+
+        return response()->json($datas);
+        
     }
 }

@@ -15,7 +15,7 @@ class EmployeeController extends Controller
         return view('admin.employee.index',compact(['dataEmployee']));
     }
 
-    public function create(Request $request)
+    public function employeeCreate(Request $request)
     {
         //validate incoming request 
         $this->validate($request, [
@@ -37,6 +37,7 @@ class EmployeeController extends Controller
                 $saveData = new Employee;
                 $saveData->full_name = $request->input('full_name');
                 $saveData->job_position = $request->input('job_position');
+                $saveData->type = $request->input('type');
 
                 if ($request->file('profile_picture')) {
                     $file = $request->file('profile_picture');
@@ -49,14 +50,40 @@ class EmployeeController extends Controller
 
                 $saveData->save();
 
-                // return response()->json([
-                //     'success' => true,
-                //     'message' => 'Input Data Berhasil',
-                //     'data'    => $saveData,
-                // ], 201);
-                return redirect('employee.create')->with( session()->flash('success', 'Berhasil') );
+                return back()->with(session()->flash('success', 'Data Berhasil Diinput'));
 
             }
+        } catch (\Throwable $th) {
+            //return error message
+            return response()->json([
+                'success' => false,
+                'message' => $th
+            ], 409);
+        }
+    }
+
+    public function employeeUpdate(Request $request, $id)
+    {
+        try {
+
+            $updateDatas = Employee::where('id', $id)->get();
+
+            $simpanData = [];
+
+            foreach ($updateDatas as $key) {
+                $simpanData['full_name'] = $key->full_name;
+                $simpanData['job_position'] = $key->job_position;
+                $simpanData['type'] = $key->type;
+                array_push($simpanData);
+            };
+
+            $updateData = Employee::find($id);
+            $updateData->full_name = $request->input('full_name') ?? $key->full_name;
+            $updateData->job_position = $request->input('job_position')  ?? $key->job_position;
+            $updateData->type = $request->input('type') ?? $key->type;
+            $updateData->save();
+
+            return back()->with(session()->flash('success', 'Update data berhasil'));
         } catch (\Throwable $th) {
             //return error message
             return response()->json([

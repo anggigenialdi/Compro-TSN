@@ -216,7 +216,6 @@
             </div>
         </div>
     </div>
-    @yield('Javascript')
     <!-- Scripts -->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -229,6 +228,9 @@
             $('#dataTable').DataTable();
         });
     </script>
+
+    @yield('autocompleteJs')
+
 
 </body>
 
