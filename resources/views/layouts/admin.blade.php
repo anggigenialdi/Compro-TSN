@@ -63,28 +63,48 @@
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Vacancy</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                    <a href="{{ route('vacancy.job') }}" class="collapse-item">
-                        <i class="fas fa-fw fa-book"></i>
-                        <span>{{ __('Kelola Lowongan') }}</span>
-                    </a>
-                    <a href="{{ route('vacancy.applicant') }}" class="collapse-item">
-                        <i class="fas fa-fw fa-book"></i>
-                        <span>{{ __('Daftar Pelamar') }}</span>
-                    </a>
+                        <a href="{{ route('vacancy.job') }}" class="collapse-item">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>{{ __('Kelola Lowongan') }}</span>
+                        </a>
+                        <a href="{{ route('vacancy.applicant') }}" class="collapse-item">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>{{ __('Daftar Pelamar') }}</span>
+                        </a>
                     </div>
                 </div>
             </li>
 
             <li class="nav-item {{ Nav::isRoute('vacancy') }}">
-                
+
             </li>
 
-            <li class="nav-item {{ Nav::isRoute('JobPosition.index') }}">
-                <a class="nav-link" href="{{ route('JobPosition.index') }}">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#masterData"
+                    aria-expanded="true" aria-controls="masterData">
                     <i class="fas fa-fw fa-list-alt"></i>
-                    <span>{{ __('Master Job Position') }}</span></a>
+                    <span>Master Data</span>
+                </a>
+                <div id="masterData" class="collapse" aria-labelledby="headingTwo"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a href="{{ route('MasterPosition.indexPosition') }}" class="collapse-item">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>{{ __('Job Position') }}</span>
+                        </a>
+                        <a href="{{ route('MasterCategory.indexCategory') }}" class="collapse-item">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>{{ __('Category') }}</span>
+                        </a>
+                        <a href="{{ route('MasterType.indexType') }}" class="collapse-item">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>{{ __('Type') }}</span>
+                        </a>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->
@@ -196,7 +216,7 @@
             </div>
         </div>
     </div>
-
+    @yield('Javascript')
     <!-- Scripts -->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -209,6 +229,7 @@
             $('#dataTable').DataTable();
         });
     </script>
+
 </body>
 
 </html>

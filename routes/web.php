@@ -26,15 +26,29 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 });
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('role:admin');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('role:admin');
 $router->group(['prefix' => 'employees'], function () use ($router) {
-Route::get('/index', [App\Http\Controllers\Employee\EmployeeController::class, 'index'])->name('employee.index')->middleware('role:admin');
-Route::post('/employees/create', [App\Http\Controllers\Employee\EmployeeController::class, 'store'])->name('employee.store')->middleware('role:admin');
+    Route::get('/index', [App\Http\Controllers\Employee\EmployeeController::class, 'index'])->name('employee.index')->middleware('role:admin');
+    Route::post('/employees/create', [App\Http\Controllers\Employee\EmployeeController::class, 'store'])->name('employee.store')->middleware('role:admin');
 });
 
+$router->group(['prefix' => 'master-data'], function () use ($router) {
+    Route::get('/positions', 'Master\MasterDataController@indexPosition')->name('MasterPosition.indexPosition')->middleware('role:admin');
+    Route::get('/category', 'Master\MasterDataController@indexCategory')->name('MasterCategory.indexCategory')->middleware('role:admin');
+    Route::get('/type', 'Master\MasterDataController@indexType')->name('MasterType.indexType')->middleware('role:admin');
 
-Route::get('/job-positions', [App\Http\Controllers\JobPosition\MasterJobPositionController::class, 'index'])->name('JobPosition.index')->middleware('role:admin');
-Route::post('/job-positions/create', [App\Http\Controllers\JobPosition\MasterJobPositionController::class, 'create'])->name('JobPosition.create')->middleware('role:admin');
+    Route::post('/positions/create', 'Master\MasterDataController@createPosition')->name('MasterPosition.createPosition')->middleware('role:admin');
+    Route::post('/positions/{id}', 'Master\MasterDataController@updatePosition')->name('MasterPosition.updatePosition')->middleware('role:admin');
+
+    
+    Route::post('/category/create', 'Master\MasterDataController@createCategory')->name('MasterCategory.createCategory')->middleware('role:admin');
+    Route::post('/category/{id}', 'Master\MasterDataController@updateCategory')->name('MasterCategory.updateCategory')->middleware('role:admin');
+
+    Route::post('/type/create', 'Master\MasterDataController@createType')->name('MasterType.createType')->middleware('role:admin');
+    Route::post('/type/{id}', 'Master\MasterDataController@updateType')->name('MasterType.updateType')->middleware('role:admin');
+
+
+});
 
 Route::get('/vacancy/job', 'VacancyController@indexJobVacancy')->name('vacancy.job');
 Route::post('/vacancy/job', 'VacancyController@addJobVacancy')->name('vacancy.addjob');

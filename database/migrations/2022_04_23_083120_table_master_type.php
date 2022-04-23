@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TableMasterJobPosition extends Migration
+class TableMasterType extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class TableMasterJobPosition extends Migration
      */
     public function up()
     {
-        Schema::create('master_job_position', function (Blueprint $table) {
+        Schema::create('master_type', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid');
-            $table->string('position');
+            $table->string('type');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class TableMasterJobPosition extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_job_position');
+        Schema::dropIfExists('master_type');
     }
 }
