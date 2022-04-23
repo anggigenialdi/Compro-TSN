@@ -53,12 +53,13 @@ $router->group(['prefix' => 'master-data'], function () use ($router) {
     //AUTOCOMPLETE
 
 });
+$router->group(['prefix' => 'vacancy'], function () use ($router) {
 
-Route::get('/vacancy/job', 'VacancyController@indexJobVacancy')->name('vacancy.job');
-Route::post('/vacancy/job', 'VacancyController@addJobVacancy')->name('vacancy.addjob');
-Route::post('/vacancy/job/update/{id}', 'VacancyController@updateJobVacancy')->name('vacancy.updatejob');
-Route::get('/vacancy/applicant', 'VacancyController@indexApplicant')->name('vacancy.applicant');
-
+Route::get('/job', 'VacancyController@indexJobVacancy')->name('vacancy.job');
+Route::post('/job', 'VacancyController@addJobVacancy')->name('vacancy.addjob');
+Route::post('/job/update/{id}', 'VacancyController@updateJobVacancy')->name('vacancy.updatejob');
+Route::get('/applicant', 'VacancyController@indexApplicant')->name('vacancy.applicant');
+});
 Route::get('/users-dashboard', [App\Http\Controllers\Users\DashboardController::class, 'index'])->middleware('role:basic');
 Route::get('/autocomplete/position', 'Master\MasterDataController@autocompletePosition')->name('MasterPosition.autocompletePosition')->middleware('role:admin');
 Route::get('/autocomplete/type', 'Master\MasterDataController@autocompleteType')->name('MasterType.autocompleteType')->middleware('role:admin');

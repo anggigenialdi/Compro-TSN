@@ -5,13 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Vacancy;
 use App\Models\Applicant;
+use App\Models\MasterCategory;
+use App\Models\MasterJobPosition;
+use App\Models\MasterType;
+use \stdClass;
+
 class VacancyController extends Controller
 {
     public function indexJobVacancy()
     {
         $vacancies = Vacancy::orderBy('id','desc')->get();
+        $category = MasterCategory::orderBy('id','desc')->get();
+        $position = MasterJobPosition::orderBy('id','desc')->get();
+        $type = MasterType::orderBy('id','desc')->get();
 
-        return view('admin.vacancy.jobvacancy.index',compact(['vacancies']));
+        return view('admin.vacancy.jobvacancy.index',compact(['vacancies','category','position','type']));
     }
     public function addJobVacancy(Request $request){
                 $vacancy = new Vacancy;
@@ -21,6 +29,7 @@ class VacancyController extends Controller
                 $vacancy->active = true;
                 $vacancy->end_date = $request->end_date;
                 $vacancy->save();
+                return back();
     }
     public function updateJobVacancy($id,Request $request){
                 $vacancy = Vacancy::find($id);
@@ -72,18 +81,35 @@ class VacancyController extends Controller
     }
     public function getVacancyActive(){
         $vacancies = Vacancy::where('active',true)->orderBy('id','desc')->get();
+        $data = [];
+        $res_vacancy = [];
+
+        foreach ($vacancies as $vacancies) {
+            $data['job_position'] = $vacancies->masterPosition->position;
+            $data['job_category'] = $vacancies->masterCategory->category;
+            $data['job_type'] = $vacancies->masterType->type;
+            $data['end_date'] = $vacancies->end_date;
+            array_push($res_vacancy, $data);
+        }
         return response()->json([
             'success' => true,
             'message' => 'Berhasil',
-            'data'    => $vacancies
+            'data'    => $res_vacancy
         ],200);
     }
     public function getVacancyActiveDetail($id){
         $vacancy = Vacancy::where('id',$id)->first();
+        
+        $data = new \stdClass();;
+            $data->job_position= $vacancy->masterPosition->position;
+            $data->job_category= $vacancy->masterCategory->category;
+            $data->job_type = $vacancy->masterType->type;
+            $data->end_date = $vacancy->end_date;
+        
         return response()->json([
             'success' => true,
             'message' => 'Berhasil',
-            'data'    => $vacancy
+            'data'    => $data
         ],200);
     }
 }

@@ -8,26 +8,36 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="addModal"  method="POST" action="{{ route('vacancy.addjob') }}"  enctype="multipart/form-data">
+            <form class="addModal add-data"  method="POST" action="{{ route('vacancy.addjob') }}"  enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Position</label>
-                        <input type="text" class="form-control form-control-user" name="position"
-                            placeholder="{{ __('Job Position') }}" value="{{ old('position') }}"
-                            required autofocus>
+                        <select class="form-control" id="exampleFormControlSelect1" name="position" required>
+                            <option value="">Pilih</option>
+                            @foreach($position as $p)
+                            <option value={{$p->id}}>{{$p->position}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="name">Category</label>
-                        <input type="text" class="form-control form-control-user" name="category"
-                            placeholder="{{ __('Category') }}" value="{{ old('category') }}"
-                            required autofocus>
+                        <select class="form-control" id="exampleFormControlSelect1" name="category" required>
+                            <option value="">Pilih</option>
+                            @foreach($category as $cat)
+                            <option value={{$cat->id}}>{{$cat->category}}</option>
+                            @endforeach
+                        </select>
+                        
                     </div>
                     <div class="form-group">
                         <label for="name">Type</label>
-                        <input type="text" class="form-control form-control-user" name="type"
-                            placeholder="{{ __('Type') }}" value="{{ old('type') }}"
-                            required autofocus>
+                        <select class="form-control" id="exampleFormControlSelect1" name="type" required>
+                            <option value="">Pilih</option>
+                            @foreach($type as $t)
+                            <option value={{$t->id}}>{{$t->type}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="name">End Date</label>
@@ -47,3 +57,4 @@
         </div>
     </div>
 </div>
+

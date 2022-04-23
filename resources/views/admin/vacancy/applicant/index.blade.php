@@ -19,6 +19,7 @@
                           <th style="height:5px;text-align:center;padding:0px;">No Telp.</th>
                           <th style="height:5px;text-align:center;padding:0px;">Posisi</th>
                           <th style="height:5px;text-align:center;padding:0px;">Pengalaman</th>
+                          <th style="height:5px;text-align:center;padding:0px;">Tgl Melamar</th>
                           <th style="height:5px;text-align:center;padding:0px;">Aksi</th>
                           </tr>
                           </thead>
@@ -31,6 +32,7 @@
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$app->phone_number}}</td>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$app->job_position}}</td>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$app->work_experience}} Tahun</td>
+                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$app->created_at}}</td>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">
                                 <a class="btn btn-sm btn-primary" href="http://localhost:8000/resume/{{$app->file_resume}}" target ="_blank">
                                     Lihat CV

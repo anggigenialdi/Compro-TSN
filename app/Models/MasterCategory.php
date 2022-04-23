@@ -9,5 +9,8 @@ class MasterCategory extends Model
 {
     use HasFactory;
     protected $table = "master_category";
-
+    public function vacancy()
+    {
+        return $this->hasMany('App\Vacancy');
+    }
 }

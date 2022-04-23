@@ -29,10 +29,10 @@
                           @foreach($vacancies as $vacancy)
                               <tr>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$loop->iteration }}</td>
-                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$vacancy->position}}</td>
+                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$vacancy->masterPosition->position}}</td>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$vacancy->active ? 'Aktif' :'Tidak Aktif'}}</td>
-                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$vacancy->category}}</td>
-                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$vacancy->type}}</td>
+                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$vacancy->masterCategory->category}}</td>
+                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$vacancy->masterType->type}}</td>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">{{$vacancy->end_date}}</td>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit-{{$vacancy->id}}">
