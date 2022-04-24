@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
+use App\Models\MasterJobPosition;
+use App\Models\MasterType;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -11,8 +13,10 @@ class EmployeeController extends Controller
     public function employeeIndex()
     {
         $dataEmployee = Employee::orderBy('id','desc')->get();
+        $position = MasterJobPosition::orderBy('id','desc')->get();
+        $type = MasterType::orderBy('id','desc')->get();
 
-        return view('admin.employee.index',compact(['dataEmployee']));
+        return view('admin.employee.index',compact(['dataEmployee', 'position', 'type']));
     }
 
     public function employeeCreate(Request $request)
@@ -66,22 +70,14 @@ class EmployeeController extends Controller
     {
         try {
 
-            $updateDatas = Employee::where('id', $id)->get();
+            $updateDatas = Employee::where('id', $id);
 
-            $simpanData = [];
+            $updateDatas->update([
+                'full_name' => request('full_name'),
+                'job_position' => request('job_position'),
+                'type' => request('type'),
+            ]);
 
-            foreach ($updateDatas as $key) {
-                $simpanData['full_name'] = $key->full_name;
-                $simpanData['job_position'] = $key->job_position;
-                $simpanData['type'] = $key->type;
-                array_push($simpanData);
-            };
-
-            $updateData = Employee::find($id);
-            $updateData->full_name = $request->input('full_name') ?? $key->full_name;
-            $updateData->job_position = $request->input('job_position')  ?? $key->job_position;
-            $updateData->type = $request->input('type') ?? $key->type;
-            $updateData->save();
 
             return back()->with(session()->flash('success', 'Update data berhasil'));
         } catch (\Throwable $th) {

@@ -173,7 +173,7 @@ class MasterDataController extends Controller
 
     public function autocompletePosition(Request $request)
     {
-        $datas = MasterJobPosition::select('position')
+        $datas = MasterJobPosition::select('id', 'position')
             ->where('position', 'LIKE', "%{$request->terms}%")
             ->pluck('position');
 
@@ -182,7 +182,7 @@ class MasterDataController extends Controller
 
     public function autocompleteType(Request $request)
     {
-        $datas = MasterType::select('type')
+        $datas = MasterType::select('id','type')
             ->where('type', 'LIKE', "%{$request->terms}%")
             ->pluck('type');
 

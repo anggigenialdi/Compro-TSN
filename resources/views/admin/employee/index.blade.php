@@ -54,8 +54,9 @@
                                     {{ $employee->type }}</td>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">
                                     <!-- Edit Modal -->
-                                    <button type="button" class="btn btn-warning badge" data-toggle="modal"
+                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
                                         data-target="#editModal{{ $employee->id }}" title="Edit">
+                                        Edit
                                         <i class="fas fa-cogs"></i>
                                     </button>
                                     <!-- End -->
@@ -67,7 +68,7 @@
             </div>
         </div>
     </div>
-    @include('admin.employee.autocomplete')
+    @include('admin.employee.javascript')
     @include('admin.employee.modal-edit')
 
 @endsection

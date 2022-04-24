@@ -229,7 +229,7 @@
         });
     </script>
 
-    @yield('autocompleteJs')
+    @yield('main-js')
 
 
 </body>

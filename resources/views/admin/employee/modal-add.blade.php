@@ -35,8 +35,10 @@
                     <div class="form-group">
                         <label for="name">Foto</label>
                         <input type="file" class="type form-control form-control-user" name="profile_picture"
-                            placeholder="{{ __('Foto') }}" value="{{ old('profile_picture') }}" required autofocus>
+                            placeholder="{{ __('Foto') }}" value="{{ old('profile_picture') }}" required autofocus id="imgInp">
+                            <img style="visibility:hidden"  id="prview" src=""  width=150 height=150 />
                     </div>
+                    
 
                 </div>
                 <div class="modal-footer">
