@@ -29,7 +29,7 @@
             }
         });
     </script>
-    {{-- Priview Image form add--}}
+    {{-- Priview Image form add --}}
     <script>
         imgInp.onchange = evt => {
             const [file] = imgInp.files
@@ -41,15 +41,4 @@
         }
     </script>
 
-    {{-- Priview Image form edit--}}
-    <script>
-        imgEdit.onchange = evt => {
-            const [file] = imgEdit.files
-            if (file) {
-                views.style.visibility = 'visible';
-
-                views.src = URL.createObjectURL(file)
-            }
-        }
-    </script>
 @endsection

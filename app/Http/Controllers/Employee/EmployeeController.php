@@ -7,16 +7,17 @@ use App\Models\Employee;
 use App\Models\MasterJobPosition;
 use App\Models\MasterType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class EmployeeController extends Controller
 {
     public function employeeIndex()
     {
-        $dataEmployee = Employee::orderBy('id','desc')->get();
-        $position = MasterJobPosition::orderBy('id','desc')->get();
-        $type = MasterType::orderBy('id','desc')->get();
+        $dataEmployee = Employee::orderBy('id', 'desc')->get();
+        $position = MasterJobPosition::orderBy('id', 'desc')->get();
+        $type = MasterType::orderBy('id', 'desc')->get();
 
-        return view('admin.employee.index',compact(['dataEmployee', 'position', 'type']));
+        return view('admin.employee.index', compact(['dataEmployee', 'position', 'type']));
     }
 
     public function employeeCreate(Request $request)
@@ -55,7 +56,6 @@ class EmployeeController extends Controller
                 $saveData->save();
 
                 return back()->with(session()->flash('success', 'Data Berhasil Diinput'));
-
             }
         } catch (\Throwable $th) {
             //return error message
@@ -69,17 +69,26 @@ class EmployeeController extends Controller
     public function employeeUpdate(Request $request, $id)
     {
         try {
+            $updateDatas = Employee::where('id', $id)->first();
+            $updateDatas->full_name = $request->input('full_name');
+            $updateDatas->job_position = $request->input('job_position');
+            $updateDatas->type = $request->input('type');
 
-            $updateDatas = Employee::where('id', $id);
+            if (request()->hasFile('profile_picture') && request('profile_picture') != '') { 
+                $imagePath = public_path('employee/'. $updateDatas->profile_picture);
+                if(File::exists($imagePath)){
+                    unlink($imagePath);
+                }
+                $file = $request->file('profile_picture');
+                $extension = $file->getClientOriginalName();
+                $filename = date('YmdHi') . $extension;
+                $file->move(public_path('employee'), $filename);
+                $updateDatas->profile_picture=$filename;
+            }
 
-            $updateDatas->update([
-                'full_name' => request('full_name'),
-                'job_position' => request('job_position'),
-                'type' => request('type'),
-            ]);
-
-
+            $updateDatas->save();
             return back()->with(session()->flash('success', 'Update data berhasil'));
+
         } catch (\Throwable $th) {
             //return error message
             return response()->json([
