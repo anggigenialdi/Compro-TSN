@@ -24,6 +24,9 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     Route::post('/vacancy/apply', 'VacancyController@applyVacancy');
     Route::get('/vacancy/active', 'VacancyController@getVacancyActive');
     Route::get('/vacancy/{id}', 'VacancyController@getVacancyActiveDetail');
+
+
+    Route::get('/employees', 'Employee\EmployeeController@getAllEmployee');
 });
 
 

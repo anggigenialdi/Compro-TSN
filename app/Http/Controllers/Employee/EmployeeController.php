@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\MasterJobPosition;
 use App\Models\MasterType;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -33,10 +34,8 @@ class EmployeeController extends Controller
             $duplicate = Employee::where('job_position', $request->input('job_position'))->first();
 
             if ($duplicate) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Posisi pekerjaan sudah diisi',
-                ], 425);
+                Toastr::warning('Position has taken','Warning');
+                return back();
             } else {
 
                 $saveData = new Employee;
@@ -55,10 +54,12 @@ class EmployeeController extends Controller
 
                 $saveData->save();
 
-                return back()->with(session()->flash('success', 'Data Berhasil Diinput'));
+                Toastr::success('Data added successfully','Success');
+                return back();
             }
         } catch (\Throwable $th) {
             //return error message
+            Toastr::error($th,'Error');
             return response()->json([
                 'success' => false,
                 'message' => $th
@@ -74,26 +75,43 @@ class EmployeeController extends Controller
             $updateDatas->job_position = $request->input('job_position');
             $updateDatas->type = $request->input('type');
 
-            if (request()->hasFile('profile_picture') && request('profile_picture') != '') { 
-                $imagePath = public_path('employee/'. $updateDatas->profile_picture);
-                if(File::exists($imagePath)){
+            if (request()->hasFile('profile_picture') && request('profile_picture') != '') {
+                $imagePath = public_path('employee/' . $updateDatas->profile_picture);
+                if (File::exists($imagePath)) {
                     unlink($imagePath);
                 }
                 $file = $request->file('profile_picture');
                 $extension = $file->getClientOriginalName();
                 $filename = date('YmdHi') . $extension;
                 $file->move(public_path('employee'), $filename);
-                $updateDatas->profile_picture=$filename;
+                $updateDatas->profile_picture = $filename;
             }
 
             $updateDatas->save();
             return back()->with(session()->flash('success', 'Update data berhasil'));
-
         } catch (\Throwable $th) {
             //return error message
             return response()->json([
                 'success' => false,
                 'message' => $th
+            ], 409);
+        }
+    }
+
+    public function getAllEmployee()
+    {
+        try {
+            $dataEmployee = Employee::orderBy('id', 'desc')->get();
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Berhasil',
+                'data'    => $dataEmployee
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => $th,
             ], 409);
         }
     }
