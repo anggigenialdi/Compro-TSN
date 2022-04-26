@@ -11,7 +11,19 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'CMS-TSN') }}</title>
+
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+    <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/app.css">
 
     <!-- Fonts -->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
@@ -58,6 +70,11 @@
                     <span>{{ __('Dashboard') }}</span></a>
             </li>
 
+            <li class="nav-item {{ Nav::isRoute('product.index') }}">
+                <a class="nav-link" href="{{ route('product.index') }}">
+                    <i class="fas fa-fw fa-code"></i>
+                    <span>{{ __('Products') }}</span></a>
+            </li>
             <li class="nav-item {{ Nav::isRoute('employee.index') }}">
                 <a class="nav-link" href="{{ route('employee.index') }}">
                     <i class="fas fa-fw fa-users"></i>

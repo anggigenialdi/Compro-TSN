@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,7 +33,7 @@ class LoginController extends Controller
         $role = Auth::user()->role;
         switch ($role) {
             case 'admin':
-                session()->flash('success', 'You are logged in!');
+                Toastr::success('You are logged in!', 'Success', ["positionClass" => "toast-top-center"]);
                 return ('home');
                 break;
             case 'basic':

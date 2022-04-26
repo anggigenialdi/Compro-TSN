@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Providers\RouteServiceProvider;
+use Brian2694\Toastr\Facades\Toastr;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +24,7 @@ class RedirectIfAuthenticated
 
             switch ($role) {
                 case 'admin':
-                    session()->flash('success', 'You are logged in!');
+                    Toastr::success('You are logged in!', 'Success', ["positionClass" => "toast-top-center"]);
                     return ('home');
                     break;
                 case 'basic':

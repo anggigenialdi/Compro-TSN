@@ -19,6 +19,8 @@
             {{ session('status') }}
         </div>
     @endif
+    {!! Toastr::message() !!}
+
 
     <div class="row">
 

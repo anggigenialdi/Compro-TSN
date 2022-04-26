@@ -67,3 +67,8 @@ Route::get('/users-dashboard', [App\Http\Controllers\Users\DashboardController::
 Route::get('/autocomplete/position', 'Master\MasterDataController@autocompletePosition')->name('MasterPosition.autocompletePosition')->middleware('role:admin');
 Route::get('/autocomplete/type', 'Master\MasterDataController@autocompleteType')->name('MasterType.autocompleteType')->middleware('role:admin');
 
+$router->group(['prefix' => 'products'], function () use ($router) {
+    Route::get('/index', 'ProductController@indexProduct')->name('product.index')->middleware('role:admin');
+    Route::post('/create', 'ProductController@crateProduct')->name('product.create')->middleware('role:admin');
+    Route::post('/update', 'ProductController@updateProduct')->name('product.update')->middleware('role:admin');
+});

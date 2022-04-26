@@ -88,7 +88,9 @@ class EmployeeController extends Controller
             }
 
             $updateDatas->save();
-            return back()->with(session()->flash('success', 'Update data berhasil'));
+            Toastr::success('Data update successfully','Success');
+            return back();
+
         } catch (\Throwable $th) {
             //return error message
             return response()->json([
