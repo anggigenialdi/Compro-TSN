@@ -40,21 +40,21 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="name">Nama </label>
+                            <label for="name">Full Name</label>
                             <input type="text" class="form-control form-control-user" name="full_name"
                                 placeholder="{{ __('Full Name') }}" value="{{ $jp->full_name }}" required
                                 autofocus>
                         </div>
 
                         <div class="form-group">
-                            <label for="name">Position</label>
+                            <label for="name">Job Position</label>
                             <input type="text" class="position form-control form-control-user" name="job_position"
                                 placeholder="{{ __('Job Position') }}" value="{{ $jp->job_position }}" required
                                 autofocus>
                         </div>
 
                         <div class="form-group">
-                            <label for="name">Type</label>
+                            <label for="name">Job Type</label>
                             <input type="text" class="type form-control form-control-user" name="type"
                                 placeholder="{{ __('Type') }}" value="{{ $jp->type }}" required autofocus>
                         </div>

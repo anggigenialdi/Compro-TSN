@@ -24,7 +24,7 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
                         Close
                         <button type="submit" class="btn btn-primary">
-                            Add
+                            Save
                         </button>
                 </div>
             </form>

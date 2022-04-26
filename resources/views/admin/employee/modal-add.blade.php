@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addModal">Add</h5>
+                <h5 class="modal-title" id="addModal">Add Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="name">Type</label>
+                        <label for="name">Job Type</label>
                         <input type="text" class="type form-control form-control-user" name="type"
                             placeholder="{{ __('example: Leader, Staff') }}" value="{{ old('type') }}" required
                             autofocus>
@@ -50,7 +50,7 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
                         Close
                         <button type="submit" class="btn btn-primary">
-                            Add
+                            Save
                         </button>
                 </div>
             </form>

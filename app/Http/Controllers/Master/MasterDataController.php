@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MasterCategory;
 use App\Models\MasterJobPosition;
 use App\Models\MasterType;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 
@@ -37,10 +38,8 @@ class MasterDataController extends Controller
             $duplicate = MasterJobPosition::where('position', $request->input('position'))->first();
 
             if ($duplicate) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Data Duplikat',
-                ], 425);
+                Toastr::warning('Duplicate data', 'Warning');
+                return back();
             } else {
 
                 $saveData = new MasterJobPosition;
@@ -48,7 +47,8 @@ class MasterDataController extends Controller
                 $saveData->uuid = Uuid::uuid4()->getHex();
                 $saveData->save();
 
-                return back()->with(session()->flash('success', 'Data Berhasil Diinput'));
+                Toastr::success('Data added successfully', 'Success');
+                return back();
             }
         } catch (\Throwable $th) {
             //return error message
@@ -67,7 +67,8 @@ class MasterDataController extends Controller
             $updateData->position = $request->input('position');
             $updateData->save();
 
-            return back()->with(session()->flash('success', 'Update data berhasil'));
+            Toastr::success('Data update successfully', 'Success');
+            return back();
         } catch (\Throwable $th) {
             //return error message
             return response()->json([
@@ -84,10 +85,8 @@ class MasterDataController extends Controller
             $duplicate = MasterCategory::where('category', $request->input('category'))->first();
 
             if ($duplicate) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Data Duplikat',
-                ], 425);
+                Toastr::warning('Data duplicate', 'Warning');
+                return back();
             } else {
 
                 $saveData = new MasterCategory();
@@ -95,7 +94,8 @@ class MasterDataController extends Controller
                 $saveData->uuid = Uuid::uuid4()->getHex();
                 $saveData->save();
 
-                return back()->with(session()->flash('success', 'Data Berhasil Diinput'));
+                Toastr::success('Data added successfully', 'Success');
+                return back();
             }
         } catch (\Throwable $th) {
             //return error message
@@ -114,7 +114,8 @@ class MasterDataController extends Controller
             $updateData->category = $request->input('category');
             $updateData->save();
 
-            return back()->with(session()->flash('success', 'Update data berhasil'));
+            Toastr::success('Data update successfully', 'Success');
+            return back();
         } catch (\Throwable $th) {
             //return error message
             return response()->json([
@@ -131,10 +132,8 @@ class MasterDataController extends Controller
             $duplicate = MasterType::where('type', $request->input('type'))->first();
 
             if ($duplicate) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Data Duplikat',
-                ], 425);
+                Toastr::warning('Data duplicate', 'Warning');
+                return back();
             } else {
 
                 $saveData = new MasterType();
@@ -142,7 +141,8 @@ class MasterDataController extends Controller
                 $saveData->uuid = Uuid::uuid4()->getHex();
                 $saveData->save();
 
-                return back()->with(session()->flash('success', 'Data Berhasil Diinput'));
+                Toastr::success('Data update successfully', 'Success');
+                return back();
             }
         } catch (\Throwable $th) {
             //return error message
@@ -161,7 +161,8 @@ class MasterDataController extends Controller
             $updateData->type = $request->input('type');
             $updateData->save();
 
-            return back()->with(session()->flash('success', 'Update data berhasil'));
+            Toastr::success('Data update successfully', 'Success');
+            return back();
         } catch (\Throwable $th) {
             //return error message
             return response()->json([
@@ -182,11 +183,10 @@ class MasterDataController extends Controller
 
     public function autocompleteType(Request $request)
     {
-        $datas = MasterType::select('id','type')
+        $datas = MasterType::select('id', 'type')
             ->where('type', 'LIKE', "%{$request->terms}%")
             ->pluck('type');
 
         return response()->json($datas);
-        
     }
 }
