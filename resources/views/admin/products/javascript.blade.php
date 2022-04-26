@@ -11,6 +11,7 @@
         });
     </script>
 
+    {{-- Multiple Image --}}
     <script type="text/javascript">
         $(document).ready(function() {
             $("#btn-success").click(function() {

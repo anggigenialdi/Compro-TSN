@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+
 
 class ProductController extends Controller
 {
@@ -14,7 +16,7 @@ class ProductController extends Controller
 
         return view('admin.products.index', compact(['dataProduct']));
     }
-    public function crateProduct(Request $request)
+    public function createProduct(Request $request)
     {
         //validate incoming request 
         $this->validate($request, [
@@ -36,14 +38,15 @@ class ProductController extends Controller
                 $saveData->description = $request->input('description');
 
                 if ($request->hasfile('product_picture')) {
+                    $files = [];
+
                     foreach ($request->file('product_picture') as $file) {
-                        $name = time().rand(1,100) . $file->extension();
+                        $name = time() . rand(1, 100) . $file->extension();
                         $file->move(public_path('products'), $name);
-                        $files[] = $name;
+                        array_push($files, $name);
                     }
+                    $saveData->product_picture = implode(',', $files);
                 }
-                // $saveData->product_picture = json_encode($files);
-                $saveData->product_picture = implode(',',$files);
                 // dd($saveData);
 
                 $saveData->save();
@@ -53,7 +56,42 @@ class ProductController extends Controller
             }
         } catch (\Throwable $th) {
             //return error message
-            Toastr::error($th, 'Error');
+            dd($th);
+            return response()->json([
+                'success' => false,
+                'message' => $th->message,
+            ], 409);
+        }
+    }
+
+    public function updateProduct(Request $request, $id)
+    {
+        try {
+            $updateDatas = Product::where('id', $id)->first();
+            $updateDatas->title = $request->input('title');
+            $updateDatas->description = $request->input('description');
+
+            if (request()->hasFile('product_picture') && request('product_picture') != '') {
+                $imagePath = public_path('products/' . $updateDatas->product_picture);
+                if (File::exists($imagePath)) {
+                    unlink($imagePath);
+                }
+                if ($request->hasfile('product_picture')) {
+                    foreach ($request->file('product_picture') as $file) {
+                        $name = time() . rand(1, 100) . $file->extension();
+                        $file->move(public_path('products'), $name);
+                        $files[] = $name;
+                    }
+                }
+                $updateDatas->product_picture = implode(',', $files);
+            }
+            // dd($updateDatas);
+
+            $updateDatas->save();
+            Toastr::success('Data update successfully', 'Success');
+            return back();
+        } catch (\Throwable $th) {
+            //return error message
             return response()->json([
                 'success' => false,
                 'message' => $th

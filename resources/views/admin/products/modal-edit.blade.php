@@ -48,25 +48,23 @@
                                 value="{{ old('description') }}" required
                                 autofocus>{{ $jp->description }}</textarea>
                         </div>
-
                         <div class="form-group">
-                            <section class="section">
-                                <div class="row">
-                                    <div class="col-12 col-md-12">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5 class="card-title">Multiple Image</h5>
-                                            </div>
-                                            <div class="card-content">
-                                                <div class="card-body">
-                                                    <!-- File uploader with multiple files upload -->
-                                                    <input type="file" class="multiple-files-filepond" multiple required>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="input-group hdtuto control-group lst increment">
+                                <input type="file" name="product_picture[]" class="myfrm form-control">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-success" type="button"><i
+                                            class="fldemo glyphicon glyphicon-plus"></i>Add</button>
+                                </div>
+                            </div>
+                            <div class="clone hide" style="visibility:hidden">
+                                <div class="hdtuto control-group lst input-group" style="margin-top:10px">
+                                    <input type="file" name="product_picture[]" class="myfrm form-control">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-danger" type="button"><i
+                                                class="fldemo glyphicon glyphicon-remove"></i> Remove</button>
                                     </div>
                                 </div>
-                            </section>
+                            </div>
                         </div>
 
                         <div class="modal-footer">
