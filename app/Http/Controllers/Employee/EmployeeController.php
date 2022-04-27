@@ -45,7 +45,8 @@ class EmployeeController extends Controller
 
                 if ($request->file('profile_picture')) {
                     $file = $request->file('profile_picture');
-                    $filename = date('YmdHi') . $file->getClientOriginalName();
+                    $extension = $file->extension();
+                    $filename = 'employee'. time() . rand(1, 100)  . $extension;
                     $file->move(public_path('employee'), $filename);
                     $data['profile_picture'] = $filename;
                 }
@@ -81,8 +82,8 @@ class EmployeeController extends Controller
                     unlink($imagePath);
                 }
                 $file = $request->file('profile_picture');
-                $extension = $file->getClientOriginalName();
-                $filename = date('YmdHi') . $extension;
+                $extension = $file->extension();
+                $filename = 'employee'. time() . rand(1, 100)  . $extension;
                 $file->move(public_path('employee'), $filename);
                 $updateDatas->profile_picture = $filename;
             }

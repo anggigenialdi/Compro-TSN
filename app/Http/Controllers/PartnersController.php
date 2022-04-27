@@ -37,7 +37,7 @@ class PartnersController extends Controller
 
                 if ($request->file('picture')) {
                     $file = $request->file('picture');
-                    $filename = time() . rand(1, 100) . $file->extension();
+                    $filename = 'partners'. time() . rand(1, 100). $file->extension();
                     $file->move(public_path('partners'), $filename);
                     $data['picture'] = $filename;
                 }
@@ -73,7 +73,7 @@ class PartnersController extends Controller
                 }
                 $file = $request->file('picture');
                 $extension = $file->extension();
-                $filename =  time() . rand(1, 100)  . $extension;
+                $filename = 'partners'. time() . rand(1, 100)  . $extension;
                 $file->move(public_path('partners'), $filename);
                 $updateDatas->picture = $filename;
             }
@@ -86,6 +86,24 @@ class PartnersController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $th
+            ], 409);
+        }
+    }
+
+    public function getAllPartners()
+    {
+        try {
+            $dataPartners = Partners::orderBy('id', 'desc')->get();
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Berhasil',
+                'data'    => $dataPartners
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => $th,
             ], 409);
         }
     }

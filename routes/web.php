@@ -27,6 +27,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
 
     Route::get('/employees', 'Employee\EmployeeController@getAllEmployee');
+    Route::get('/partners', 'PartnersController@getAllPartners');
 });
 
 
