@@ -24,7 +24,7 @@ class RedirectIfAuthenticated
 
             switch ($role) {
                 case 'admin':
-                    Toastr::success('You are logged in!', 'Success', ["positionClass" => "toast-top-center"]);
+                    Toastr::info('Welcome', 'Info', ["positionClass" => "toast-top-center"]);
                     return ('home');
                     break;
                 case 'basic':

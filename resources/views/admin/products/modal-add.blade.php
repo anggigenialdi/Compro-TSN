@@ -31,7 +31,7 @@
                             <input type="file" name="product_picture[]" class="myfrm form-control">
                             <div class="input-group-btn">
                                 <button class="btn btn-success" type="button"><i
-                                        class="fldemo glyphicon glyphicon-plus"></i>Add</button>
+                                        class="fldemo fa fa-plus"></i> File</button>
                             </div>
                         </div>
                         <div class="clone hide" style="visibility:hidden">
@@ -39,7 +39,7 @@
                                 <input type="file" name="product_picture[]" class="myfrm form-control">
                                 <div class="input-group-btn">
                                     <button class="btn btn-danger" type="button"><i
-                                            class="fldemo glyphicon glyphicon-remove"></i> Remove</button>
+                                            class="fldemo fa fa-remove"></i> Remove</button>
                                 </div>
                             </div>
                         </div>

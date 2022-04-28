@@ -41,8 +41,8 @@
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">
                                     {{ $employee->type }}</td>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">
-                                    <img src="{{ asset('../employee/' . $employee->profile_picture) }}" title="image preview"
-                                        class="img-thumbnail" width="45rem" height="45rem">
+                                    <img src="{{ asset('../employee/' . $employee->profile_picture) }}"  title="image preview"
+                                        class="img-thumbnail" width="45rem" height="45rem"> 
                                 </td>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">
                                     <!-- Edit Modal -->

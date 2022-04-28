@@ -90,6 +90,7 @@ class ProductController extends Controller
             $updateDatas->save();
             Toastr::success('Data update successfully', 'Success');
             return back();
+            
         } catch (\Throwable $th) {
             //return error message
             return response()->json([
