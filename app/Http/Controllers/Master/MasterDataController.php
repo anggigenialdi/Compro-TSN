@@ -10,13 +10,16 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 
+
 class MasterDataController extends Controller
 {
     public function indexPosition()
     {
         $dataJobPosition = MasterJobPosition::orderBy('id', 'desc')->get();
+        $type = MasterType::orderBy('id', 'desc')->get();
 
-        return view('admin.master.position.index', compact(['dataJobPosition']));
+
+        return view('admin.master.position.index', compact(['dataJobPosition','type']));
     }
     public function indexCategory()
     {
@@ -35,7 +38,7 @@ class MasterDataController extends Controller
     {
         try {
             //Cek Duplicate data
-            $duplicate = MasterJobPosition::where('position', $request->input('position'))->first();
+            $duplicate = MasterJobPosition::where('id', $request->input('id'))->first();
 
             if ($duplicate) {
                 Toastr::warning('Duplicate data', 'Warning');
@@ -43,8 +46,8 @@ class MasterDataController extends Controller
             } else {
 
                 $saveData = new MasterJobPosition;
+                $saveData->id_type = $request->input('id_type');
                 $saveData->position = $request->input('position');
-                $saveData->uuid = Uuid::uuid4()->getHex();
                 $saveData->save();
 
                 Toastr::success('Data added successfully', 'Success');
@@ -91,7 +94,6 @@ class MasterDataController extends Controller
 
                 $saveData = new MasterCategory();
                 $saveData->category = $request->input('category');
-                $saveData->uuid = Uuid::uuid4()->getHex();
                 $saveData->save();
 
                 Toastr::success('Data added successfully', 'Success');
@@ -138,7 +140,6 @@ class MasterDataController extends Controller
 
                 $saveData = new MasterType();
                 $saveData->type = $request->input('type');
-                $saveData->uuid = Uuid::uuid4()->getHex();
                 $saveData->save();
 
                 Toastr::success('Data update successfully', 'Success');
@@ -189,4 +190,28 @@ class MasterDataController extends Controller
 
         return response()->json($datas);
     }
+
+    public function getDataJobPosition(Request $request, $id_type)
+    {
+        try {
+
+            $getData = MasterJobPosition::where('id_type', $id_type)->get();
+
+
+            if (!$getData) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data tidak ada',
+                ], 404);
+            } else {
+                return   $getData;
+            }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => $th
+            ], 409);
+        }
+    }
+
 }

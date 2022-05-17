@@ -17,7 +17,7 @@
                     <div class="form-group">
                         <label for="name">Category</label>
                         <input type="text" class="form-control form-control-user" name="category"
-                            placeholder="{{ __('Category') }}" value="{{ old('category') }}" required autofocus>
+                            placeholder="{{ __('Contoh: Engineer, Desaigner') }}" value="{{ old('category') }}" required autofocus>
                     </div>
 
                 </div>

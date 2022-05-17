@@ -15,7 +15,7 @@ class TableMasterJobPosition extends Migration
     {
         Schema::create('master_job_position', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('uuid');
+            $table->unsignedBigInteger('id_type');
             $table->string('position');
             $table->timestamps();
         });

@@ -28,6 +28,10 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
     Route::get('/employees', 'Employee\EmployeeController@getAllEmployee');
     Route::get('/partners', 'PartnersController@getAllPartners');
+
+    $router->get('master-position/{id_type}', 'Master\MasterDataController@getDataJobPosition');
+    
+
 });
 
 
@@ -53,6 +57,8 @@ $router->group(['prefix' => 'master-data'], function () use ($router) {
 
     Route::post('/type/create', 'Master\MasterDataController@createType')->name('MasterType.createType')->middleware('role:admin');
     Route::post('/type/{id}', 'Master\MasterDataController@updateType')->name('MasterType.updateType')->middleware('role:admin');
+
+
 
     //AUTOCOMPLETE
 

@@ -15,9 +15,19 @@
                 <div class="modal-body">
 
                     <div class="form-group">
+                        <label for="name">Job Type</label>
+                        <select class="form-control" id="exampleFormControlSelect1" name="id_type" required>
+                            <option value="">Pilih</option>
+                            @foreach ($type as $t)
+                                <option value={{ $t->id }}>{{ $t->type }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="name">Position</label>
                         <input type="text" class="form-control form-control-user" name="position"
-                            placeholder="{{ __('Job Position') }}" value="{{ old('position') }}" required autofocus>
+                            placeholder="{{ __('Contoh : CEO, HR, General Manager') }}" value="{{ old('position') }}" required autofocus>
                     </div>
                 </div>
                 <div class="modal-footer">

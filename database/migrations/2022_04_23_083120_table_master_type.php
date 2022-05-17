@@ -15,7 +15,6 @@ class TableMasterType extends Migration
     {
         Schema::create('master_type', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('uuid');
             $table->string('type');
             $table->timestamps();
         });

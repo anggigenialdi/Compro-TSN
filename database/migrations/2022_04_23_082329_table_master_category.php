@@ -15,7 +15,6 @@ class TableMasterCategory extends Migration
     {
         Schema::create('master_category', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('uuid');
             $table->string('category');            
             $table->timestamps();
         });

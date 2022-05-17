@@ -17,7 +17,7 @@
                     <div class="form-group">
                         <label for="name">Type</label>
                         <input type="text" class="form-control form-control-user" name="type"
-                            placeholder="{{ __('Type') }}" value="{{ old('type') }}" required autofocus>
+                            placeholder="{{ __('Contoh: Leader, Staff') }}" value="{{ old('type') }}" required autofocus>
                     </div>
 
                 </div>
