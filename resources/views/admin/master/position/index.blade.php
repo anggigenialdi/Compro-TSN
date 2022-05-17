@@ -23,7 +23,8 @@
                     <thead>
                         <tr style="height:5px;text-align:center;padding:0px;font-size:12px;background-color:#DCDCDC">
                             <th style="height:5px;text-align:center;padding:0px;width:10px;">No</th>
-                            <th style="height:5px;text-align:center;padding:0px;">Posisi</th>
+                            <th style="height:5px;text-align:center;padding:0px;">Job Posisi</th>
+                            <th style="height:5px;text-align:center;padding:0px;">Job Type</th>
                             <th style="height:5px;text-align:center;padding:0px;">Aksi</th>
                         </tr>
                     </thead>
@@ -35,6 +36,8 @@
                                 </td>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">
                                     {{ $jp->position }}</td>
+                                <td style="height:5px;text-align:center;padding:0px;font-size:12px;">
+                                    {{ $jp->masterType->type }}</td>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">
                                     <!-- Edit Modal -->
                                     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"

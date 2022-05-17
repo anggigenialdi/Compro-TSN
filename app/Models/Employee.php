@@ -26,4 +26,8 @@ class Employee extends Model
     {
         return $this->belongsTo('App\Models\MasterType','type', 'id');
     }
+    public function masterJobPosition()
+    {
+        return $this->belongsTo('App\Models\MasterJobPosition','job_position', 'id');
+    }
 }

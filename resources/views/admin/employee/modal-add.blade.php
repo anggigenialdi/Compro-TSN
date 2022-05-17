@@ -33,22 +33,19 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="name">Job Position</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="job_position" required>
+                        <label for="name">Job Type</label>
+                        <select class="form-control" id="type" name="type" required>
                             <option value="">Pilih</option>
-                            @foreach ($position as $p)
-                                <option value={{ $p->id }}>{{ $p->position }}</option>
+                            @foreach ($type as $t)
+                                <option value={{ $t->id }}>{{ $t->type }}</option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="name">Job Type</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="type" required>
-                            <option value="">Pilih</option>
-                            @foreach ($type as $t)
-                                <option value={{ $t->id }}>{{ $t->type }}</option>
-                            @endforeach
+                        <label for="name">Job Position</label>
+                        <select class="form-control job" id="job" name="job_position" required>
+                        
                         </select>
                     </div>
 

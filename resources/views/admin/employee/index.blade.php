@@ -37,9 +37,9 @@
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">
                                     {{ $employee->full_name }}</td>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">
-                                    {{ $employee->job_position }}</td>
+                                    {{ $employee->MasterJobPosition->position }}</td>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">
-                                    {{ $employee->type }}</td>
+                                    {{ $employee->masterType->type }}</td>
                                 <td style="height:5px;text-align:center;padding:0px;font-size:12px;">
                                     <img src="{{ asset('../employee/' . $employee->profile_picture) }}"  title="image preview"
                                         class="img-thumbnail" width="45rem" height="45rem"> 

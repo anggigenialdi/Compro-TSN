@@ -41,4 +41,27 @@
         }
     </script>
 
+    <script>
+        $(document).on('change', '#type', function() {
+            var id_type = $(this).val();
+            console.log(id_type);
+            $.ajax({
+                type: "GET",
+                url: 'http://localhost:8000/api/v1/master-position/' + id_type,
+
+                success: function(data) {
+                    console.log(data);
+                    $(".job").html(
+                        '<option selected disabled="true" value="0">=== choose === </option>'
+                    );
+                    $.each(data, function(index, value) {
+                        $(".job").append("<option value=' " + value.id + " '> " + value
+                            .position + "</option>");
+                    });
+                },
+                error: function() {}
+            });
+
+        });
+    </script>
 @endsection
