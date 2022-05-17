@@ -17,7 +17,8 @@
                     <div class="form-group">
                         <div class="wrapper">
                             <div class="image">
-                                <img id="prview" src="{{ asset('no-img.png') }}"  title="image preview" class="img-thumbnail" width="200px" height="200px">
+                                <img id="prview" src="{{ asset('no-img.png') }}" title="image preview"
+                                    class="img-thumbnail" width="200px" height="200px">
                                 <input type="file" class="form-control form-control-user" name="profile_picture"
                                     placeholder="{{ __('Foto') }}" value="{{ old('profile_picture') }}" required
                                     autofocus id="imgInp">
@@ -33,16 +34,22 @@
 
                     <div class="form-group">
                         <label for="name">Job Position</label>
-                        <input type="text" class="position form-control form-control-user" name="job_position"
-                            placeholder="{{ __('example: Founder') }}" value="{{ old('job_position') }}" required
-                            autofocus id="position">
+                        <select class="form-control" id="exampleFormControlSelect1" name="job_position" required>
+                            <option value="">Pilih</option>
+                            @foreach ($position as $p)
+                                <option value={{ $p->id }}>{{ $p->position }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <label for="name">Job Type</label>
-                        <input type="text" class="type form-control form-control-user" name="type"
-                            placeholder="{{ __('example: Leader, Staff') }}" value="{{ old('type') }}" required
-                            autofocus>
+                        <select class="form-control" id="exampleFormControlSelect1" name="type" required>
+                            <option value="">Pilih</option>
+                            @foreach ($type as $t)
+                                <option value={{ $t->id }}>{{ $t->type }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                 </div>

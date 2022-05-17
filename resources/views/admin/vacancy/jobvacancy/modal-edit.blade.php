@@ -13,11 +13,13 @@
                         <select class="form-control" id="exampleFormControlSelect1" name="position" required>
                             <option value="">Pilih</option>
                             @foreach($position as $p)
-                            <option value={{$p->id}}  <?php
+                            <option value={{$p->id}}  
+                                <?php
                                 if ($v->position == $p->id) {
                                     echo "selected";
                                 }
-                                ?> >{{$p->position}}</option>
+                                ?> >{{$p->position}}
+                            </option>
                             @endforeach
                         </select>
                         </div>
