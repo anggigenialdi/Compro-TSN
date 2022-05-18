@@ -7,7 +7,7 @@ use App\Models\Vacancy;
 use App\Models\Applicant;
 use App\Models\MasterCategory;
 use App\Models\MasterJobPosition;
-use App\Models\MasterType;
+use App\Models\VacancyType;
 use \stdClass;
 
 class VacancyController extends Controller
@@ -17,7 +17,7 @@ class VacancyController extends Controller
         $vacancies = Vacancy::orderBy('id','desc')->get();
         $category = MasterCategory::orderBy('id','desc')->get();
         $position = MasterJobPosition::orderBy('id','desc')->get();
-        $type = MasterType::orderBy('id','desc')->get();
+        $type = VacancyType::orderBy('id','desc')->get();
 
         return view('admin.vacancy.jobvacancy.index',compact(['vacancies','category','position','type']));
     }

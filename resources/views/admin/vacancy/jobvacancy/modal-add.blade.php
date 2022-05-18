@@ -35,7 +35,7 @@
                         <select class="form-control" id="exampleFormControlSelect1" name="type" required>
                             <option value="">Pilih</option>
                             @foreach($type as $t)
-                            <option value={{$t->id}}>{{$t->type}}</option>
+                            <option value={{$t->id}}>{{$t->name}}</option>
                             @endforeach
                         </select>
                     </div>

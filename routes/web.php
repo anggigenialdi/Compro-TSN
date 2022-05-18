@@ -48,6 +48,10 @@ $router->group(['prefix' => 'master-data'], function () use ($router) {
     Route::get('/category', 'Master\MasterDataController@indexCategory')->name('MasterCategory.indexCategory')->middleware('role:admin');
     Route::get('/type', 'Master\MasterDataController@indexType')->name('MasterType.indexType')->middleware('role:admin');
 
+    Route::get('/vacancy-type', 'Master\MasterDataController@indexVacancyType')->name('MasterVacancyType.indexVacancyType')->middleware('role:admin');
+    Route::post('/vacancy-type/create', 'Master\MasterDataController@createVacancyType')->name('MasterVacancyType.createVacancyType')->middleware('role:admin');
+    Route::post('/vacancy-type/{id}', 'Master\MasterDataController@updateVacancyType')->name('MasterVacancyType.updateVacancyType')->middleware('role:admin');
+
     Route::post('/positions/create', 'Master\MasterDataController@createPosition')->name('MasterPosition.createPosition')->middleware('role:admin');
     Route::post('/positions/{id}', 'Master\MasterDataController@updatePosition')->name('MasterPosition.updatePosition')->middleware('role:admin');
 

@@ -112,7 +112,11 @@
                         </a>
                         <a href="{{ route('MasterType.indexType') }}" class="collapse-item">
                             <i class="fas fa-fw fa-book"></i>
-                            <span>{{ __('Type') }}</span>
+                            <span>{{ __('Job Type') }}</span>
+                        </a>
+                        <a href="{{ route('MasterVacancyType.indexVacancyType') }}" class="collapse-item">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>{{ __('Vacancy Type') }}</span>
                         </a>
                     </div>
                 </div>
