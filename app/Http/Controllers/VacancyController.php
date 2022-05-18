@@ -85,10 +85,11 @@ class VacancyController extends Controller
         $res_vacancy = [];
 
         foreach ($vacancies as $vacancies) {
+            $data['id'] = $vacancies->id; 
             $data['job_position'] = $vacancies->masterPosition->position;
             $data['job_category'] = $vacancies->masterCategory->category;
             $data['job_type'] = $vacancies->masterType->type;
-            $data['end_date'] = $vacancies->end_date;
+            $data['end_date'] = $vacancies->end_date; 
             array_push($res_vacancy, $data);
         }
         return response()->json([
@@ -101,6 +102,7 @@ class VacancyController extends Controller
         $vacancy = Vacancy::where('id',$id)->first();
         
         $data = new \stdClass();;
+            $data->id = $vacancy->id;
             $data->job_position= $vacancy->masterPosition->position;
             $data->job_category= $vacancy->masterCategory->category;
             $data->job_type = $vacancy->masterType->type;
