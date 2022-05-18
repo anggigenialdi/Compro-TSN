@@ -213,5 +213,27 @@ class MasterDataController extends Controller
             ], 409);
         }
     }
+    public function getDataJobPositions(Request $request, $id_type)
+    {
+        try {
+
+            $getData = MasterJobPosition::where('id_type', $id_type)->get();
+
+
+            if (!$getData) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data tidak ada',
+                ], 404);
+            } else {
+                return   $getData;
+            }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => $th
+            ], 409);
+        }
+    }
 
 }

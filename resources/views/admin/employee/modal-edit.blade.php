@@ -17,7 +17,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editModal">Edit Data {{ $jp->full_name }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="clear"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
                 <form method="POST" action="{{ route('employee.update', $jp->id) }}" enctype="multipart/form-data">
@@ -47,16 +47,28 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="name">Job Position</label>
-                            <input type="text" class="position form-control form-control-user" name="job_position"
-                                placeholder="{{ __('Job Position') }}" value="{{ $jp->job_position }}" required
-                                autofocus>
+                            <label for="name">Job Type</label>
+                            <select class="form-control type_job" name="type" required id="type_job-{{$jp->id}}" onchange="setTypeJob({{$jp->id}})">
+                                <option value="">Pilih</option>
+                                @foreach ($type as $typ)
+                                    <option value="{{ $typ->id }}"
+                                        {{ $typ->id == $jp->type ? 'selected' : '' }}>
+                                        {{ $typ->type }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="name">Job Type</label>
-                            <input type="text" class="type form-control form-control-user" name="type"
-                                placeholder="{{ __('Type') }}" value="{{ $jp->type }}" required autofocus>
+                            <label for="name">Job Position</label>
+                            <select class="form-control " id="job_position-{{$jp->id}}" name="job_position" required>
+                                @foreach ($position as $p)
+                                    <option value="{{ $p->id }}"
+                                        {{ $p->id == $jp->job_position ? 'selected' : '' }} >
+                                        {{ $p->position }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="modal-footer">

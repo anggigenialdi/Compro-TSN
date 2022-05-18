@@ -45,7 +45,6 @@
                     <div class="form-group">
                         <label for="name">Job Position</label>
                         <select class="form-control job" id="job" name="job_position" required>
-                        
                         </select>
                     </div>
 
