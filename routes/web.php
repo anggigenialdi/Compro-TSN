@@ -25,6 +25,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     Route::get('/vacancy/active', 'VacancyController@getVacancyActive');
     Route::get('/vacancy/{id}', 'VacancyController@getVacancyActiveDetail');
 
+    Route::get('/product', 'ProductController@index');
 
     Route::get('/employees', 'Employee\EmployeeController@getAllEmployee');
     Route::get('/partners', 'PartnersController@getAllPartners');

@@ -9,6 +9,7 @@ use App\Models\MasterType;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use SerializesModels;
 
 class EmployeeController extends Controller
 {
@@ -37,7 +38,6 @@ class EmployeeController extends Controller
                 Toastr::warning('Position has taken','Warning');
                 return back();
             } else {
-
                 $saveData = new Employee;
                 $saveData->full_name = $request->input('full_name');
                 $saveData->job_position = $request->input('job_position');
@@ -48,7 +48,7 @@ class EmployeeController extends Controller
                     $extension = $file->extension();
                     $filename = 'employee'. time() . rand(1, 100)  . $extension;
                     $file->move(public_path('employee'), $filename);
-                    $data['profile_picture'] = $filename;
+                    $saveData->profile_picture = $filename;
                 }
 
                 $saveData->profile_picture = $filename;

@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
+    public function index(Request $request)
+    {
+        $dataProduct = Product::orderBy('id', 'desc')->get();
+
+        return $dataProduct;
+    }
     public function indexProduct(Request $request)
     {
         $dataProduct = Product::orderBy('id', 'desc')->get();
