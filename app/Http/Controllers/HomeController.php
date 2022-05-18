@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Partners;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -25,10 +27,13 @@ class HomeController extends Controller
     public function index()
     {
         $users = User::count();
+        $products = Product::count();
+        $partners = Partners::count();
 
         $widget = [
             'users' => $users,
-            //...
+            'products' => $products,
+            'partners' => $partners,
         ];
 
         return view('home', compact('widget'));
