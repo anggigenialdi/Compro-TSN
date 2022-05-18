@@ -28,6 +28,8 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     Route::get('/product', 'ProductController@index');
 
     Route::get('/employees', 'Employee\EmployeeController@getAllEmployee');
+    Route::get('/employees/{id}', 'Employee\EmployeeController@getAllEmployeeByType');
+    Route::get('/type', 'Employee\EmployeeController@getAllType');
     Route::get('/partners', 'PartnersController@getAllPartners');
 
     $router->get('master-position/{id_type}', 'Master\MasterDataController@getDataJobPosition');    

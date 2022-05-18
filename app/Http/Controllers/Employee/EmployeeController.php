@@ -106,10 +106,72 @@ class EmployeeController extends Controller
         try {
             $dataEmployee = Employee::orderBy('id', 'desc')->get();
             
+            $data = [];
+            $data_employee = [];
+            
+            $no = 0;
+            foreach ($dataEmployee as $employee) {
+                $no++;
+                $data['id'] = $employee->id;
+                $data['full_name'] = $employee->full_name;
+                $data['position'] = $employee->masterJobPosition->position;
+                $data['type'] = $employee->masterType->type;
+                $data['picture'] = $employee->profile_picture;
+                array_push($data_employee, $data);
+            }
+            
             return response()->json([
                 'success' => true,
                 'message' => 'Berhasil',
-                'data'    => $dataEmployee
+                'data'    => $data
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => $th,
+            ], 409);
+        }
+    }
+    public function getAllEmployeeByType($id)
+    {
+        try {
+            $dataEmployee = Employee::where('type',$id)->orderBy('id', 'desc')->get();
+            
+            $data = [];
+            $data_employee = [];
+            
+            $no = 0;
+            foreach ($dataEmployee as $employee) {
+                $no++;
+                $data['id'] = $employee->id;
+                $data['full_name'] = $employee->full_name;
+                $data['position'] = $employee->masterJobPosition->position;
+                $data['type'] = $employee->masterType->type;
+                $data['picture'] = $employee->profile_picture;
+                array_push($data_employee, $data);
+            }
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Berhasil',
+                'data'    => $data
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => $th,
+            ], 409);
+        }
+    }
+    public function getAllType()
+    {
+        try {
+            $type = MasterType::orderBy('id', 'desc')->get();
+        
+            return response()->json([
+                'success' => true,
+                'message' => 'Berhasil',
+                'data'    => $type
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
