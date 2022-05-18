@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Vacancy extends Model
+class VacancyType extends Model
 {
     use HasFactory;
+    protected $table = "master_vacancy_type";
+
     public function masterCategory()
     {
         return $this->belongsTo('App\Models\MasterCategory','category', 'id');
@@ -16,12 +18,9 @@ class Vacancy extends Model
     {
         return $this->belongsTo('App\Models\MasterJobPosition','position', 'id');
     }
-    public function masterType()
-    {
-        return $this->belongsTo('App\Models\MasterType','type', 'id');
-    }
     public function masterVacancyType()
     {
         return $this->belongsTo('App\Models\MasterVacancyType','name', 'id');
     }
+
 }

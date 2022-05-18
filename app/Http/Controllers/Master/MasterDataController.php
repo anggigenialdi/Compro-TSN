@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MasterCategory;
 use App\Models\MasterJobPosition;
 use App\Models\MasterType;
+use App\Models\VacancyType;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
@@ -229,6 +230,60 @@ class MasterDataController extends Controller
                 return   $getData;
             }
         } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => $th
+            ], 409);
+        }
+    }
+
+
+    public function indexVacancyType()
+    {
+        $getData = VacancyType::orderBy('id', 'desc')->get();
+
+        return view('admin.master.vacancy-type.index', compact(['getData']));
+    }
+
+    public function createVacancyType(Request $request)
+    {
+        try {
+            //Cek Duplicate data
+            $duplicate = VacancyType::where('name', $request->input('name'))->first();
+
+            if ($duplicate) {
+                Toastr::warning('Data duplicate', 'Warning');
+                return back();
+            } else {
+
+                $saveData = new VacancyType();
+                $saveData->name = $request->input('name');
+                $saveData->save();
+
+                Toastr::success('Data update successfully', 'Success');
+                return back();
+            }
+        } catch (\Throwable $th) {
+            //return error message
+            return response()->json([
+                'success' => false,
+                'message' => $th
+            ], 409);
+        }
+    }
+
+    public function updateVacancyType(Request $request, $id)
+    {
+        try {
+
+            $updateData = VacancyType::find($id);
+            $updateData->name = $request->input('name');
+            $updateData->save();
+
+            Toastr::success('Data update successfully', 'Success');
+            return back();
+        } catch (\Throwable $th) {
+            //return error message
             return response()->json([
                 'success' => false,
                 'message' => $th

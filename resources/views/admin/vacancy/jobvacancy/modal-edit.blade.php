@@ -45,7 +45,7 @@
                                 if ($v->type == $p->id) {
                                     echo "selected";
                                 }
-                                ?> >{{$p->type}}</option>
+                                ?> >{{$p->name}}</option>
                             @endforeach
                         </select>                        </div>
                         <div class="form-group">
