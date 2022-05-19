@@ -154,7 +154,7 @@ class EmployeeController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Berhasil',
-                'data'    => $data
+                'data'    => $data_employee
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
