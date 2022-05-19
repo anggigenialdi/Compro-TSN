@@ -32,7 +32,7 @@ class EmployeeController extends Controller
         ]);
         try {
             //Cek Duplicate data
-            $duplicate = Employee::where('job_position', $request->input('job_position'))->first();
+            $duplicate = Employee::where('id', $request->input('id'))->first();
 
             if ($duplicate) {
                 Toastr::warning('Position has taken','Warning');
@@ -123,7 +123,7 @@ class EmployeeController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Berhasil',
-                'data'    => $data
+                'data'    => $data_employee
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
