@@ -91,3 +91,9 @@ $router->group(['prefix' => 'partners'], function () use ($router) {
     Route::post('/create', 'PartnersController@createPartners')->name('partners.create')->middleware('role:admin');
     Route::post('/update/{id}', 'PartnersController@updatePartners')->name('partners.update')->middleware('role:admin');
 });
+
+$router->group(['prefix' => 'our-programs'], function () use ($router) {
+    Route::get('/index', 'OurProgramsController@indexPrograms')->name('programs.index')->middleware('role:admin');
+    Route::post('/create', 'OurProgramsController@createPrograms')->name('programs.create')->middleware('role:admin');
+    Route::post('/update/{id}', 'OurProgramsController@updatePrograms')->name('programs.update')->middleware('role:admin');
+});

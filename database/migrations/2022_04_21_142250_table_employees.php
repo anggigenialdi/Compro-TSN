@@ -20,6 +20,11 @@ class TableEmployees extends Migration
             $table->string('type')->nullable();
             $table->string('category')->nullable();
             $table->string('profile_picture');
+            $table->string('linkedin')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('github')->nullable();
+            $table->string('detail')->nullable();
             $table->timestamps();
         });
     }

@@ -102,6 +102,10 @@
                 <div id="masterData" class="collapse" aria-labelledby="headingTwo"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <a href="{{ route('MasterType.indexType') }}" class="collapse-item">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>{{ __('Job Type') }}</span>
+                        </a>
                         <a href="{{ route('MasterPosition.indexPosition') }}" class="collapse-item">
                             <i class="fas fa-fw fa-book"></i>
                             <span>{{ __('Job Position') }}</span>
@@ -109,10 +113,6 @@
                         <a href="{{ route('MasterCategory.indexCategory') }}" class="collapse-item">
                             <i class="fas fa-fw fa-book"></i>
                             <span>{{ __('Category') }}</span>
-                        </a>
-                        <a href="{{ route('MasterType.indexType') }}" class="collapse-item">
-                            <i class="fas fa-fw fa-book"></i>
-                            <span>{{ __('Job Type') }}</span>
                         </a>
                         <a href="{{ route('MasterVacancyType.indexVacancyType') }}" class="collapse-item">
                             <i class="fas fa-fw fa-book"></i>
@@ -126,6 +126,11 @@
                 <a class="nav-link" href="{{ route('partners.index') }}">
                     <i class="fas fa-fw fa-briefcase"></i>
                     <span>{{ __('Partners') }}</span></a>
+            </li>
+            <li class="nav-item {{ Nav::isRoute('programs.index') }}">
+                <a class="nav-link" href="{{ route('programs.index') }}">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>{{ __('Our Programs') }}</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">

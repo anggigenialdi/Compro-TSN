@@ -24,47 +24,35 @@ class EmployeeController extends Controller
 
     public function employeeCreate(Request $request)
     {
-        //validate incoming request 
-        $this->validate($request, [
-            'full_name'  => 'required|string',
-            'job_position' => 'required|string',
-            // 'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-        try {
-            //Cek Duplicate data
-            $duplicate = Employee::where('id', $request->input('id'))->first();
+        $duplicate = Employee::where('id', $request->input('id'))->first();
 
-            if ($duplicate) {
-                Toastr::warning('Position has taken','Warning');
-                return back();
-            } else {
-                $saveData = new Employee;
-                $saveData->full_name = $request->input('full_name');
-                $saveData->job_position = $request->input('job_position');
-                $saveData->type = $request->input('type');
+        if ($duplicate) {
+            Toastr::warning('Position has taken','Warning');
+            return back();
+        } else {
+            $saveData = new Employee();
+            $saveData->full_name = $request->input('full_name');
+            $saveData->job_position = $request->input('job_position');
+            $saveData->type = $request->input('type');
+            $saveData->detail = $request->input('detail');
+            $saveData->instagram = $request->input('instagram');
+            $saveData->facebook = $request->input('facebook');
+            $saveData->linkedin = $request->input('linkedin');
 
-                if ($request->file('profile_picture')) {
-                    $file = $request->file('profile_picture');
-                    $extension = $file->extension();
-                    $filename = 'employee'. time() . rand(1, 100)  . $extension;
-                    $file->move(public_path('employee'), $filename);
-                    $saveData->profile_picture = $filename;
-                }
-
+            if ($request->file('profile_picture')) {
+                $file = $request->file('profile_picture');
+                $extension = $file->extension();
+                $filename = 'employee'. time() . rand(1, 100)  . $extension;
+                $file->move(public_path('employee'), $filename);
                 $saveData->profile_picture = $filename;
-
-                $saveData->save();
-
-                Toastr::success('Data added successfully','Success');
-                return back();
             }
-        } catch (\Throwable $th) {
-            //return error message
-            Toastr::error($th,'Error');
-            return response()->json([
-                'success' => false,
-                'message' => $th
-            ], 409);
+
+            $saveData->profile_picture = $filename;
+
+            $saveData->save();
+
+            Toastr::success('Data added successfully','Success');
+            return back();
         }
     }
 

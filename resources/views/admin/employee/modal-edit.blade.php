@@ -8,7 +8,6 @@
         display: inline-block;
         vertical-align: top;
     }
-
 </style>
 @foreach ($dataEmployee as $jp)
     <div class="modal fade" id="editModal{{ $jp->id }}" tabindex="-1" role="dialog"
@@ -48,8 +47,8 @@
 
                         <div class="form-group">
                             <label for="name">Job Type</label>
-                            <select class="form-control type_job" name="type" required id="type_job-{{$jp->id}}" onchange="setTypeJob({{$jp->id}})">
-                                <option value="">Pilih</option>
+                            <select class="form-control type_job" name="type" required
+                                id="type_job-{{ $jp->id }}" onchange="setTypeJob({{ $jp->id }})">
                                 @foreach ($type as $typ)
                                     <option value="{{ $typ->id }}"
                                         {{ $typ->id == $jp->type ? 'selected' : '' }}>
@@ -61,14 +60,45 @@
 
                         <div class="form-group">
                             <label for="name">Job Position</label>
-                            <select class="form-control " id="job_position-{{$jp->id}}" name="job_position" required>
+                            <select class="form-control " id="job_position-{{ $jp->id }}" name="job_position"
+                                required>
                                 @foreach ($position as $p)
                                     <option value="{{ $p->id }}"
-                                        {{ $p->id == $jp->job_position ? 'selected' : '' }} >
+                                        {{ $p->id == $jp->job_position ? 'selected' : '' }}>
                                         {{ $p->position }}
                                     </option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div id="mj-{{$jp->id}}">
+                            @if ($jp->MasterJobPosition->position == 'CEO' || $jp->MasterJobPosition->position == 'Founder & CEO' || $jp->MasterJobPosition->position == 'Founder&CEO' || $jp->MasterJobPosition->position == 'Commissioner' || $jp->MasterJobPosition->position == 'CBDO' || $jp->MasterJobPosition->position == 'CFO')
+                            <div class="form-group">
+                                <label for="name">Description</label>
+                                <textarea class="form-control" id="description" rows="5" name="detail" placeholder="{{ __('Detail') }}"
+                                    value="{{ old('detail') }}" required> {{ $jp->detail }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Instagram</label>
+                                <input type="text" class="form-control form-control-user" name="instagram"
+                                placeholder="{{ __('www.instagram.com') }}" value="{{ $jp->instagram }}" required
+                                autofocus>
+                                </div>
+                            <div class="form-group">
+                                <label for="name">Facebook</label>
+                                <input type="text" class="form-control form-control-user" name="facebook"
+                                    placeholder="{{ __('www.facebook.com') }}" value="{{ $jp->facebook }}" required
+                                    autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">LinkedIn</label>
+                                <input type="text" class="form-control form-control-user" name="linkedin"
+                                    placeholder="{{ __('www.linkedin.com') }}" value="{{$jp->linkedin }}" required
+                                    autofocus>
+                            </div>
+                        @endif
+                        </div>  
+                        <div id="des-{{$jp->id}}">
+                            
                         </div>
 
                         <div class="modal-footer">
